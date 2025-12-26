@@ -1,0 +1,1010 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ILLIUM ADS | Elite Performance Advertising</title>
+    <meta name="description" content="Elite performance advertising agency. We transform ad spend into predictable, scalable revenue.">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <style>
+        /* ============================================
+           HERO - BRAND INTRO FOCUSED
+        ============================================ */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 10rem 4% 6rem;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-inner {
+            max-width: 1100px;
+            margin: 0 auto;
+            position: relative;
+            z-index: 2;
+        }
+        
+        /* Animated rings behind hero */
+        .hero-rings {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            pointer-events: none;
+            z-index: 0;
+        }
+        
+        .ring {
+            position: absolute;
+            border: 1px solid var(--border-subtle);
+            border-radius: 50%;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            opacity: 0;
+            animation: ringExpand 4s ease-out infinite;
+        }
+        
+        .ring:nth-child(1) { animation-delay: 0s; }
+        .ring:nth-child(2) { animation-delay: 1s; }
+        .ring:nth-child(3) { animation-delay: 2s; }
+        .ring:nth-child(4) { animation-delay: 3s; }
+        
+        @keyframes ringExpand {
+            0% {
+                width: 100px;
+                height: 100px;
+                opacity: 0.4;
+                border-color: var(--accent-electric);
+            }
+            100% {
+                width: 1000px;
+                height: 1000px;
+                opacity: 0;
+                border-color: var(--accent-violet);
+            }
+        }
+        
+        .hero-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.625rem 1.25rem;
+            background: rgba(0, 240, 255, 0.06);
+            border: 1px solid rgba(0, 240, 255, 0.15);
+            margin-bottom: 2.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s var(--ease-expo) 2.6s forwards;
+        }
+        
+        .badge-dot {
+            width: 6px;
+            height: 6px;
+            background: var(--accent-electric);
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .badge-text {
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-electric);
+        }
+        
+        .hero-title {
+            font-size: clamp(3rem, 8vw, 7rem);
+            font-weight: 900;
+            line-height: 1;
+            letter-spacing: -0.04em;
+            margin-bottom: 1.5rem;
+        }
+        
+        .hero-title .line {
+            display: block;
+            overflow: hidden;
+        }
+        
+        .hero-title .word {
+            display: inline-block;
+            transform: translateY(110%);
+            animation: wordReveal 1s var(--ease-expo) forwards;
+        }
+        
+        .hero-title .line:nth-child(1) .word { animation-delay: 2.7s; }
+        .hero-title .line:nth-child(2) .word { animation-delay: 2.85s; }
+        
+        .hero-title .gradient {
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .hero-tagline {
+            font-size: clamp(1.1rem, 2vw, 1.4rem);
+            color: var(--text-muted);
+            line-height: 1.7;
+            max-width: 650px;
+            margin: 0 auto 3rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s var(--ease-expo) 3s forwards;
+        }
+        
+        .hero-tagline strong {
+            color: var(--text-white);
+            font-weight: 600;
+        }
+        
+        /* CTA Group */
+        .hero-cta {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 1.5rem;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeUp 0.8s var(--ease-expo) 3.15s forwards;
+        }
+        
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            align-items: center;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+        
+        .btn-hero {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 1.25rem 2.5rem;
+            background: var(--text-white);
+            border: none;
+            color: var(--bg-void);
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            font-weight: 700;
+            letter-spacing: 0.01em;
+            overflow: hidden;
+            transition: all 0.4s var(--ease-expo);
+        }
+        
+        .btn-hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: var(--gradient-cyber);
+            transform: translateY(100%);
+            transition: transform 0.4s var(--ease-expo);
+        }
+        
+        .btn-hero span,
+        .btn-hero svg {
+            position: relative;
+            z-index: 1;
+            transition: color 0.3s ease;
+        }
+        
+        .btn-hero:hover {
+            box-shadow: 0 20px 60px rgba(0, 240, 255, 0.25);
+        }
+        
+        .btn-hero:hover::before {
+            transform: translateY(0);
+        }
+        
+        .btn-hero:hover span {
+            color: var(--bg-void);
+        }
+        
+        .btn-hero svg {
+            transition: transform 0.3s var(--ease-expo);
+        }
+        
+        .btn-hero:hover svg {
+            transform: translateX(4px);
+        }
+        
+        .btn-outline {
+            padding: 1.25rem 2rem;
+            background: transparent;
+            border: 1px solid var(--border-light);
+            color: var(--text-white);
+            font-family: var(--font-main);
+            font-size: 0.95rem;
+            font-weight: 600;
+            transition: all 0.4s var(--ease-expo);
+        }
+        
+        .btn-outline:hover {
+            border-color: var(--accent-electric);
+            background: rgba(0, 240, 255, 0.05);
+        }
+        
+        /* Scroll hint */
+        .hero-scroll {
+            position: absolute;
+            bottom: 3rem;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.75rem;
+            opacity: 0;
+            animation: fadeUp 0.8s var(--ease-expo) 3.5s forwards;
+        }
+        
+        .scroll-label {
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            letter-spacing: 0.25em;
+            text-transform: uppercase;
+            color: var(--text-dim);
+        }
+        
+        .scroll-arrow {
+            width: 20px;
+            height: 30px;
+            border: 1px solid var(--border-light);
+            border-radius: 10px;
+            position: relative;
+        }
+        
+        .scroll-arrow::after {
+            content: '';
+            position: absolute;
+            top: 6px;
+            left: 50%;
+            width: 4px;
+            height: 4px;
+            background: var(--accent-electric);
+            border-radius: 50%;
+            transform: translateX(-50%);
+            animation: scrollBounce 2s ease-in-out infinite;
+        }
+        
+        @keyframes scrollBounce {
+            0%, 100% { top: 6px; opacity: 1; }
+            50% { top: 18px; opacity: 0.3; }
+        }
+        
+        /* ============================================
+           INTRO SECTION
+        ============================================ */
+        .intro-section {
+            padding: 8rem 4%;
+            background: var(--bg-dark);
+            position: relative;
+            z-index: 2;
+        }
+        
+        .intro-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 6rem;
+            align-items: center;
+        }
+        
+        .intro-content {
+            max-width: 550px;
+        }
+        
+        .intro-label {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.75rem;
+            font-family: var(--font-mono);
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--accent-electric);
+            margin-bottom: 1.5rem;
+        }
+        
+        .intro-label::before {
+            content: '';
+            width: 30px;
+            height: 1px;
+            background: var(--accent-electric);
+        }
+        
+        .intro-title {
+            font-size: clamp(2rem, 4vw, 3rem);
+            font-weight: 800;
+            line-height: 1.15;
+            letter-spacing: -0.02em;
+            margin-bottom: 1.5rem;
+        }
+        
+        .intro-title .highlight {
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .intro-text {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 1.8;
+            margin-bottom: 2rem;
+        }
+        
+        .intro-text strong {
+            color: var(--text-white);
+            font-weight: 600;
+        }
+        
+        .intro-features {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .feature-item {
+            display: flex;
+            align-items: center;
+            gap: 0.875rem;
+            padding: 1rem 1.25rem;
+            background: rgba(0, 240, 255, 0.03);
+            border: 1px solid var(--border-dim);
+            transition: all 0.4s var(--ease-expo);
+        }
+        
+        .feature-item:hover {
+            border-color: var(--accent-electric);
+            transform: translateX(8px);
+        }
+        
+        .feature-icon {
+            width: 36px;
+            height: 36px;
+            background: rgba(0, 240, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: var(--accent-electric);
+            flex-shrink: 0;
+        }
+        
+        .feature-icon svg {
+            width: 18px;
+            height: 18px;
+        }
+        
+        .feature-text {
+            font-size: 0.9rem;
+            font-weight: 500;
+            color: var(--text-light);
+        }
+        
+        /* Stats Card */
+        .intro-stats {
+            background: var(--bg-surface);
+            border: 1px solid var(--border-subtle);
+            padding: 2.5rem;
+            position: relative;
+        }
+        
+        .intro-stats::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 2px;
+            background: var(--gradient-cyber);
+        }
+        
+        .stats-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border-dim);
+        }
+        
+        .stats-title {
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .stats-title::before {
+            content: '';
+            width: 8px;
+            height: 8px;
+            background: #10B981;
+            animation: pulse 2s ease-in-out infinite;
+        }
+        
+        .stats-badge {
+            padding: 0.25rem 0.625rem;
+            background: rgba(16, 185, 129, 0.1);
+            border: 1px solid rgba(16, 185, 129, 0.2);
+            font-family: var(--font-mono);
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #10B981;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+        }
+        
+        .stat-box {
+            padding: 1.5rem;
+            background: rgba(0, 240, 255, 0.02);
+            border: 1px solid var(--border-dim);
+            text-align: center;
+            transition: all 0.4s var(--ease-expo);
+        }
+        
+        .stat-box:hover {
+            border-color: var(--accent-electric);
+            background: rgba(0, 240, 255, 0.05);
+            transform: translateY(-4px);
+        }
+        
+        .stat-value {
+            font-size: 2.25rem;
+            font-weight: 800;
+            background: var(--gradient-cyber);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            line-height: 1.1;
+        }
+        
+        .stat-label {
+            font-size: 0.65rem;
+            color: var(--text-dim);
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-top: 0.375rem;
+        }
+        
+        /* ============================================
+           RESPONSIVE
+        ============================================ */
+        @media (max-width: 1024px) {
+            .intro-grid {
+                grid-template-columns: 1fr;
+                gap: 3rem;
+            }
+            
+            .intro-stats {
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                width: 100%;
+                max-width: 320px;
+            }
+            
+            .btn-hero,
+            .btn-outline {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .intro-features {
+                gap: 0.75rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Preloader -->
+    <div class="preloader" id="preloader">
+        <div class="preloader-content">
+            <div class="preloader-logo">
+                <span class="char">I</span><span class="char">L</span><span class="char">L</span><span class="char">I</span><span class="char">U</span><span class="char">M</span>
+            </div>
+            <div class="preloader-line"></div>
+            <div class="preloader-percent">0%</div>
+        </div>
+    </div>
+
+    <!-- Cursor -->
+    <div class="cursor cursor-dot"></div>
+    <div class="cursor cursor-ring"></div>
+
+    <!-- Grid Overlay -->
+    <div class="grid-overlay"></div>
+
+    <!-- Noise -->
+    <div class="noise"></div>
+
+    <!-- Navigation -->
+    <nav class="nav">
+        <a href="#" class="nav-logo" data-hover>ILLIUM ADS</a>
+        <ul class="nav-menu">
+            <li><a href="#about" class="nav-link">About</a></li>
+            <li><a href="#services" class="nav-link">Services</a></li>
+            <li><a href="#results" class="nav-link">Results</a></li>
+            <li><a href="#contact" class="nav-link">Contact</a></li>
+        </ul>
+        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+            <span>Get in Touch</span>
+        </button>
+    </nav>
+
+    <!-- Hero Section - Brand Intro -->
+    <section class="hero" id="home">
+        <div class="hero-bg">
+            <div class="hero-gradient cyan"></div>
+            <div class="hero-gradient violet"></div>
+            <div class="hero-gradient magenta"></div>
+        </div>
+        
+        <div class="hero-rings">
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+            <div class="ring"></div>
+        </div>
+        
+        <div class="hero-inner">
+            <div class="hero-badge">
+                <span class="badge-dot"></span>
+                <span class="badge-text">Performance Advertising Agency</span>
+            </div>
+            
+            <h1 class="hero-title">
+                <span class="line"><span class="word">Advertising That</span></span>
+                <span class="line"><span class="word"><span class="gradient">Actually Works</span></span></span>
+            </h1>
+            
+            <p class="hero-tagline">
+                We're a performance-obsessed ad agency that turns your marketing budget into <strong>measurable, scalable revenue</strong>. No fluff. No vanity metrics. Just results.
+            </p>
+            
+            <div class="hero-cta">
+                <div class="hero-buttons">
+                    <button class="btn-hero" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" data-hover>
+                        <span>Let's Work Together</span>
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                            <path d="M5 12h14M12 5l7 7-7 7"/>
+                        </svg>
+                    </button>
+                    <a href="#about" class="btn-outline" data-hover>
+                        <span>Learn More</span>
+                    </a>
+                </div>
+            </div>
+        </div>
+        
+        <div class="hero-scroll">
+            <span class="scroll-label">Scroll to explore</span>
+            <div class="scroll-arrow"></div>
+        </div>
+    </section>
+
+    <!-- Intro / About Section -->
+    <section class="intro-section" id="about">
+        <div class="intro-grid">
+            <div class="intro-content reveal-left">
+                <div class="intro-label">Who We Are</div>
+                <h2 class="intro-title">
+                    We're the team brands call when they're <span class="highlight">ready to scale</span>
+                </h2>
+                <p class="intro-text">
+                    Illium Ads is a <strong>performance advertising agency</strong> built for brands that demand results. We combine deep platform expertise with data-driven strategy to create campaigns that don't just get clicks — they generate revenue.
+                </p>
+                <p class="intro-text">
+                    Whether you're looking to scale an e-commerce brand, generate enterprise leads, or drive app installs, we've done it all — <strong>profitably</strong>.
+                </p>
+                
+                <div class="intro-features">
+                    <div class="feature-item" data-hover>
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <span class="feature-text">Google & Meta Certified Partners</span>
+                    </div>
+                    <div class="feature-item" data-hover>
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <span class="feature-text">Full-Funnel Campaign Management</span>
+                    </div>
+                    <div class="feature-item" data-hover>
+                        <div class="feature-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/>
+                                <polyline points="22 4 12 14.01 9 11.01"/>
+                            </svg>
+                        </div>
+                        <span class="feature-text">Transparent Reporting & Analytics</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="intro-stats reveal-right">
+                <div class="stats-header">
+                    <div class="stats-title">Our Track Record</div>
+                    <div class="stats-badge">Verified</div>
+                </div>
+                <div class="stats-grid">
+                    <div class="stat-box" data-hover>
+                        <div class="stat-value">$47M+</div>
+                        <div class="stat-label">Ad Spend Managed</div>
+                    </div>
+                    <div class="stat-box" data-hover>
+                        <div class="stat-value">380%</div>
+                        <div class="stat-label">Average ROAS</div>
+                    </div>
+                    <div class="stat-box" data-hover>
+                        <div class="stat-value">200+</div>
+                        <div class="stat-label">Campaigns Launched</div>
+                    </div>
+                    <div class="stat-box" data-hover>
+                        <div class="stat-value">12+</div>
+                        <div class="stat-label">Years Experience</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee-strip">
+        <div class="marquee-track">
+            <div class="marquee-group">
+                <span class="marquee-item">Google Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Meta Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">TikTok Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">LinkedIn Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Programmatic<span class="marquee-dot"></span></span>
+                <span class="marquee-item">YouTube Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Display Network<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Performance Max<span class="marquee-dot"></span></span>
+            </div>
+            <div class="marquee-group">
+                <span class="marquee-item">Google Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Meta Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">TikTok Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">LinkedIn Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Programmatic<span class="marquee-dot"></span></span>
+                <span class="marquee-item">YouTube Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Display Network<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Performance Max<span class="marquee-dot"></span></span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Services Section -->
+    <section class="services-section" id="services">
+        <div class="section-header reveal">
+            <div class="section-number">01 — Services</div>
+            <h2 class="section-title">What We <span class="highlight">Do</span></h2>
+            <p class="section-desc">End-to-end advertising solutions built for performance.</p>
+        </div>
+        
+        <div class="services-grid">
+            <div class="service-item" data-hover>
+                <span class="service-num">01</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Paid Media Strategy</h3>
+                <p class="service-desc">Full-funnel architecture across Google, Meta, TikTok, and programmatic networks.</p>
+            </div>
+            
+            <div class="service-item" data-hover>
+                <span class="service-num">02</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <circle cx="12" cy="12" r="10"/>
+                        <circle cx="12" cy="12" r="6"/>
+                        <circle cx="12" cy="12" r="2"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Precision Targeting</h3>
+                <p class="service-desc">Advanced audience segmentation using first-party data and behavioral signals.</p>
+            </div>
+            
+            <div class="service-item" data-hover>
+                <span class="service-num">03</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M18 20V10"/>
+                        <path d="M12 20V4"/>
+                        <path d="M6 20v-6"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Analytics & Attribution</h3>
+                <p class="service-desc">Custom dashboards and multi-touch attribution for total clarity.</p>
+            </div>
+            
+            <div class="service-item" data-hover>
+                <span class="service-num">04</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                        <path d="M2 2l7.586 7.586"/>
+                        <circle cx="11" cy="11" r="2"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Creative Strategy</h3>
+                <p class="service-desc">Performance creative frameworks that balance brand with direct response.</p>
+            </div>
+            
+            <div class="service-item" data-hover>
+                <span class="service-num">05</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Conversion Optimization</h3>
+                <p class="service-desc">Landing page optimization and funnel analysis for maximum value.</p>
+            </div>
+            
+            <div class="service-item" data-hover>
+                <span class="service-num">06</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Scale & Automation</h3>
+                <p class="service-desc">Systematic scaling and automated bidding for maximum efficiency.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section" id="results">
+        <div class="section-header reveal">
+            <div class="section-number">02 — Results</div>
+            <h2 class="section-title">Proven <span class="highlight">Performance</span></h2>
+            <p class="section-desc">Real campaigns. Real numbers. Real growth.</p>
+        </div>
+        
+        <div class="results-grid">
+            <div class="result-item" data-hover>
+                <span class="result-tag">E-Commerce / DTC</span>
+                <h3 class="result-title">Premium Fashion Brand</h3>
+                <p class="result-desc">Scaled from $80K to $400K monthly revenue while maintaining profitability.</p>
+                <div class="result-stat">
+                    <span class="stat-big">5.8x</span>
+                    <span class="stat-suffix">ROAS achieved</span>
+                </div>
+            </div>
+            
+            <div class="result-item" data-hover>
+                <span class="result-tag">SaaS / B2B</span>
+                <h3 class="result-title">Enterprise Lead Generation</h3>
+                <p class="result-desc">Restructured campaigns to deliver qualified leads at fraction of previous cost.</p>
+                <div class="result-stat">
+                    <span class="stat-big">-67%</span>
+                    <span class="stat-suffix">Cost per lead</span>
+                </div>
+            </div>
+            
+            <div class="result-item" data-hover>
+                <span class="result-tag">Health & Wellness</span>
+                <h3 class="result-title">Supplement Brand Growth</h3>
+                <p class="result-desc">Took brand from startup to market leader with systematic expansion.</p>
+                <div class="result-stat">
+                    <span class="stat-big">10x</span>
+                    <span class="stat-suffix">Revenue growth</span>
+                </div>
+            </div>
+            
+            <div class="result-item" data-hover>
+                <span class="result-tag">Fintech / Apps</span>
+                <h3 class="result-title">Mobile App Acquisition</h3>
+                <p class="result-desc">Drove millions of qualified installs while maintaining strict CPI targets.</p>
+                <div class="result-stat">
+                    <span class="stat-big">2.4M</span>
+                    <span class="stat-suffix">Installs @ $0.87</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Process Section -->
+    <section class="process-section" id="process">
+        <div class="section-header reveal">
+            <div class="section-number">03 — Process</div>
+            <h2 class="section-title">How We <span class="highlight">Work</span></h2>
+            <p class="section-desc">A proven framework refined over 200+ campaigns.</p>
+        </div>
+        
+        <div class="process-wrapper">
+            <div class="process-track">
+                <div class="process-step" data-hover>
+                    <div class="step-num">01</div>
+                    <h3 class="step-title">Discovery</h3>
+                    <p class="step-desc">Deep dive into your business, goals, and current performance.</p>
+                </div>
+                
+                <div class="process-step" data-hover>
+                    <div class="step-num">02</div>
+                    <h3 class="step-title">Strategy</h3>
+                    <p class="step-desc">Custom campaign architecture designed for your specific objectives.</p>
+                </div>
+                
+                <div class="process-step" data-hover>
+                    <div class="step-num">03</div>
+                    <h3 class="step-title">Execute</h3>
+                    <p class="step-desc">Launch with meticulous attention to every detail.</p>
+                </div>
+                
+                <div class="process-step" data-hover>
+                    <div class="step-num">04</div>
+                    <h3 class="step-title">Optimize</h3>
+                    <p class="step-desc">Continuous testing and refinement for peak performance.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Testimonial Section -->
+    <section class="testimonial-section">
+        <div class="section-header reveal">
+            <div class="section-number">04 — Testimonials</div>
+            <h2 class="section-title">Client <span class="highlight">Feedback</span></h2>
+        </div>
+        
+        <div class="testimonial-wrapper reveal">
+            <div class="testimonial-block">
+                <div class="quote-mark">
+                    <svg viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M11.192 15.757c0-.88-.23-1.618-.69-2.217-.326-.412-.768-.683-1.327-.812-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.956.76-3.022.66-1.065 1.515-1.867 2.558-2.403L9.373 5c-.8.396-1.56.898-2.26 1.505-.71.607-1.34 1.305-1.9 2.094s-.98 1.68-1.25 2.69-.346 2.04-.217 3.1c.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l.002.003zm9.124 0c0-.88-.23-1.618-.69-2.217-.326-.42-.77-.692-1.327-.817-.56-.124-1.074-.13-1.54-.022-.16-.94.09-1.95.75-3.02.66-1.06 1.514-1.86 2.557-2.4L18.49 5c-.8.396-1.555.898-2.26 1.505-.708.607-1.34 1.305-1.894 2.094-.556.79-.97 1.68-1.24 2.69-.273 1-.345 2.04-.217 3.1.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l-.007.003z"/>
+                    </svg>
+                </div>
+                <p class="testimonial-text">Illium Ads completely transformed our advertising approach. Our customer acquisition cost dropped 52% while we quadrupled our ad spend. The ROI speaks for itself.</p>
+                <div class="testimonial-author">
+                    <div class="author-avatar">SM</div>
+                    <div class="author-info">
+                        <div class="author-name">Sarah Mitchell</div>
+                        <div class="author-role">CMO, TechStart Inc.</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <div class="cta-inner reveal">
+            <h2 class="cta-title">Ready to <span class="gradient">Grow</span>?</h2>
+            <p class="cta-desc">Get in touch and let's discuss how we can help scale your business.</p>
+            <button class="btn-hero" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" data-hover>
+                <span>Contact Us</span>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                    <path d="M5 12h14M12 5l7 7-7 7"/>
+                </svg>
+            </button>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section class="contact-section" id="contact">
+        <div class="contact-grid">
+            <div class="contact-info reveal-left">
+                <h3>Let's <span class="gradient">Connect</span></h3>
+                <p>Have a project in mind? We'd love to hear about it. Drop us a message and we'll get back to you within 24 hours.</p>
+                <div class="contact-list">
+                    <div class="contact-item" data-hover>
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <polyline points="12 6 12 12 16 14"/>
+                            </svg>
+                        </div>
+                        <span class="contact-text">Response within 24 hours</span>
+                    </div>
+                    <div class="contact-item" data-hover>
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
+                                <polyline points="22,6 12,13 2,6"/>
+                            </svg>
+                        </div>
+                        <span class="contact-text">hello@illiumads.com</span>
+                    </div>
+                    <div class="contact-item" data-hover>
+                        <div class="contact-icon">
+                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <line x1="2" y1="12" x2="22" y2="12"/>
+                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
+                            </svg>
+                        </div>
+                        <span class="contact-text">Working Globally (Remote)</span>
+                    </div>
+                </div>
+            </div>
+            
+            <form class="contact-form reveal-right" id="contactForm">
+                <div class="form-row">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" name="name" required placeholder="Your name">
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required placeholder="you@company.com">
+                    </div>
+                </div>
+                <div class="form-group full">
+                    <label for="company">Company</label>
+                    <input type="text" id="company" name="company" placeholder="Your company">
+                </div>
+                <div class="form-group full">
+                    <label for="message">Message</label>
+                    <textarea id="message" name="message" required placeholder="Tell us about your project..."></textarea>
+                </div>
+                <button type="submit" class="form-submit" data-hover>
+                    <span>Send Message</span>
+                </button>
+                <div class="form-message" id="formMessage"></div>
+            </form>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-inner">
+            <div class="footer-logo">ILLIUM ADS</div>
+            <div class="footer-links">
+                <a href="#about">About</a>
+                <a href="#services">Services</a>
+                <a href="#results">Results</a>
+                <a href="#contact">Contact</a>
+            </div>
+            <p class="footer-copy">&copy; 2025 Illium Ads. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+</body>
+</html>
