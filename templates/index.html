@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ILLIUM ADS | Elite Performance Advertising</title>
-    <meta name="description" content="Elite performance advertising agency. We transform ad spend into predictable, scalable revenue.">
+    <title>Illium</title>
+    <meta name="description" content="Expert ad management built for small businesses. Stop wasting money on ads that don't work — we'll make every dollar count.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
@@ -200,7 +200,7 @@
         }
         
         .btn-hero:hover {
-            box-shadow: 0 20px 60px rgba(0, 240, 255, 0.25);
+            box-shadow: 0 20px 60px rgba(45, 123, 245, 0.35);
         }
         
         .btn-hero:hover::before {
@@ -238,7 +238,7 @@
         /* Scroll hint */
         .hero-scroll {
             position: absolute;
-            bottom: 3rem;
+            bottom: 1.5rem;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
@@ -514,15 +514,167 @@
                 width: 100%;
                 justify-content: center;
             }
+            
+            .hero-rings {
+                opacity: 0.5;
+            }
         }
         
         @media (max-width: 768px) {
-            .stats-grid {
-                grid-template-columns: 1fr;
+            .hero {
+                padding: 7rem 5% 4rem;
+                min-height: auto;
+            }
+            
+            .hero-inner {
+                padding: 0;
+            }
+            
+            .hero-badge {
+                padding: 0.5rem 0.875rem;
+                margin-bottom: 1.5rem;
+            }
+            
+            .badge-text {
+                font-size: 0.6rem;
+                letter-spacing: 0.15em;
+            }
+            
+            .hero-title {
+                font-size: clamp(2rem, 9vw, 3rem);
+                margin-bottom: 1.25rem;
+            }
+            
+            .hero-tagline {
+                font-size: 0.95rem;
+                line-height: 1.7;
+                margin-bottom: 2rem;
+            }
+            
+            .hero-cta {
+                gap: 1.25rem;
+            }
+            
+            .hero-buttons {
+                max-width: 100%;
+                gap: 0.75rem;
+            }
+            
+            .btn-hero {
+                padding: 1rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .btn-outline {
+                padding: 1rem 1.5rem;
+                font-size: 0.9rem;
+            }
+            
+            .hero-scroll {
+                display: none;
+            }
+            
+            .ring {
+                animation-duration: 5s;
+            }
+            
+            /* Intro section mobile */
+            .intro-section {
+                padding: 4rem 5%;
+            }
+            
+            .intro-content {
+                max-width: 100%;
+            }
+            
+            .intro-label {
+                font-size: 0.6rem;
+                margin-bottom: 1rem;
+            }
+            
+            .intro-title {
+                font-size: 1.6rem;
+                margin-bottom: 1.25rem;
+            }
+            
+            .intro-text {
+                font-size: 0.9rem;
+                margin-bottom: 1.5rem;
             }
             
             .intro-features {
-                gap: 0.75rem;
+                gap: 0.625rem;
+            }
+            
+            .feature-item {
+                padding: 0.875rem;
+            }
+            
+            .feature-icon {
+                width: 32px;
+                height: 32px;
+            }
+            
+            .feature-text {
+                font-size: 0.8rem;
+            }
+            
+            .intro-stats {
+                padding: 1.5rem;
+            }
+            
+            .stats-header {
+                margin-bottom: 1.25rem;
+                padding-bottom: 1rem;
+            }
+            
+            .stats-title {
+                font-size: 0.8rem;
+            }
+            
+            .stats-badge {
+                font-size: 0.55rem;
+                padding: 0.2rem 0.5rem;
+            }
+            
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 0.625rem;
+            }
+            
+            .stat-box {
+                padding: 1rem;
+            }
+            
+            .stat-value {
+                font-size: 1.5rem;
+            }
+            
+            .stat-label {
+                font-size: 0.5rem;
+                margin-top: 0.25rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero {
+                padding: 6rem 5% 3rem;
+            }
+            
+            .hero-title {
+                font-size: 1.85rem;
+            }
+            
+            .hero-tagline {
+                font-size: 0.9rem;
+            }
+            
+            .intro-title {
+                font-size: 1.4rem;
+            }
+            
+            .stat-value {
+                font-size: 1.25rem;
             }
         }
     </style>
@@ -539,10 +691,6 @@
         </div>
     </div>
 
-    <!-- Cursor -->
-    <div class="cursor cursor-dot"></div>
-    <div class="cursor cursor-ring"></div>
-
     <!-- Grid Overlay -->
     <div class="grid-overlay"></div>
 
@@ -551,14 +699,17 @@
 
     <!-- Navigation -->
     <nav class="nav">
-        <a href="#" class="nav-logo" data-hover>ILLIUM ADS</a>
+        <a href="#home" class="nav-logo" data-hover>
+            <img src="{{ url_for('static', filename='images/logowhite.png') }}" alt="Illium Logo" class="nav-logo-icon">
+            <span>ILLIUM ADS</span>
+        </a>
         <ul class="nav-menu">
             <li><a href="#about" class="nav-link">About</a></li>
             <li><a href="#services" class="nav-link">Services</a></li>
             <li><a href="#results" class="nav-link">Results</a></li>
             <li><a href="#contact" class="nav-link">Contact</a></li>
         </ul>
-        <button class="nav-cta" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})">
+        <button class="nav-cta" onclick="scrollToSection('contact')">
             <span>Get in Touch</span>
         </button>
     </nav>
@@ -581,29 +732,29 @@
         <div class="hero-inner">
             <div class="hero-badge">
                 <span class="badge-dot"></span>
-                <span class="badge-text">Performance Advertising Agency</span>
+                <span class="badge-text">Built for Small Brands</span>
             </div>
             
             <h1 class="hero-title">
-                <span class="line"><span class="word">Advertising That</span></span>
-                <span class="line"><span class="word"><span class="gradient">Actually Works</span></span></span>
+                <span class="line"><span class="word">Stop Wasting</span></span>
+                <span class="line"><span class="word"><span class="gradient">Your Ad Budget</span></span></span>
             </h1>
             
             <p class="hero-tagline">
-                We're a performance-obsessed ad agency that turns your marketing budget into <strong>measurable, scalable revenue</strong>. No fluff. No vanity metrics. Just results.
+                Running ads yourself is exhausting and expensive. We help small businesses get <strong>real results</strong> from their ad spend — without the big agency price tag.
             </p>
             
             <div class="hero-cta">
                 <div class="hero-buttons">
-                    <button class="btn-hero" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" data-hover>
-                        <span>Let's Work Together</span>
+                    <button class="btn-hero" onclick="scrollToSection('contact')" data-hover>
+                        <span>Get in Touch</span>
                         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                             <path d="M5 12h14M12 5l7 7-7 7"/>
                         </svg>
                     </button>
-                    <a href="#about" class="btn-outline" data-hover>
+                    <button class="btn-outline" onclick="scrollToSection('about')" data-hover>
                         <span>Learn More</span>
-                    </a>
+                    </button>
                 </div>
             </div>
         </div>
@@ -620,13 +771,13 @@
             <div class="intro-content reveal-left">
                 <div class="intro-label">Who We Are</div>
                 <h2 class="intro-title">
-                    We're the team brands call when they're <span class="highlight">ready to scale</span>
+                    Finally, ad management that <span class="highlight">actually works</span>
                 </h2>
                 <p class="intro-text">
-                    Illium Ads is a <strong>performance advertising agency</strong> built for brands that demand results. We combine deep platform expertise with data-driven strategy to create campaigns that don't just get clicks — they generate revenue.
+                    Illium Ads is built for <strong>small businesses and startups</strong> who are tired of throwing money at ads that don't convert. We manage your campaigns with the same expertise big brands get — at a fraction of the cost.
                 </p>
                 <p class="intro-text">
-                    Whether you're looking to scale an e-commerce brand, generate enterprise leads, or drive app installs, we've done it all — <strong>profitably</strong>.
+                    Whether you're running a local shop, an online store, or a growing service business, we'll turn your ad budget into <strong>actual customers</strong>.
                 </p>
                 
                 <div class="intro-features">
@@ -637,7 +788,7 @@
                                 <polyline points="22 4 12 14.01 9 11.01"/>
                             </svg>
                         </div>
-                        <span class="feature-text">Google & Meta Certified Partners</span>
+                        <span class="feature-text">No long-term contracts required</span>
                     </div>
                     <div class="feature-item" data-hover>
                         <div class="feature-icon">
@@ -646,7 +797,7 @@
                                 <polyline points="22 4 12 14.01 9 11.01"/>
                             </svg>
                         </div>
-                        <span class="feature-text">Full-Funnel Campaign Management</span>
+                        <span class="feature-text">Affordable plans for any budget</span>
                     </div>
                     <div class="feature-item" data-hover>
                         <div class="feature-icon">
@@ -655,32 +806,32 @@
                                 <polyline points="22 4 12 14.01 9 11.01"/>
                             </svg>
                         </div>
-                        <span class="feature-text">Transparent Reporting & Analytics</span>
+                        <span class="feature-text">Weekly reports you'll actually understand</span>
                     </div>
                 </div>
             </div>
             
             <div class="intro-stats reveal-right">
                 <div class="stats-header">
-                    <div class="stats-title">Our Track Record</div>
+                    <div class="stats-title">Small Business Results</div>
                     <div class="stats-badge">Verified</div>
                 </div>
                 <div class="stats-grid">
                     <div class="stat-box" data-hover>
-                        <div class="stat-value">$47M+</div>
-                        <div class="stat-label">Ad Spend Managed</div>
+                        <div class="stat-value">150+</div>
+                        <div class="stat-label">Small Brands Helped</div>
                     </div>
                     <div class="stat-box" data-hover>
-                        <div class="stat-value">380%</div>
-                        <div class="stat-label">Average ROAS</div>
+                        <div class="stat-value">3.2x</div>
+                        <div class="stat-label">Avg. Return on Ad Spend</div>
                     </div>
                     <div class="stat-box" data-hover>
-                        <div class="stat-value">200+</div>
-                        <div class="stat-label">Campaigns Launched</div>
+                        <div class="stat-value">-45%</div>
+                        <div class="stat-label">Wasted Spend Reduction</div>
                     </div>
                     <div class="stat-box" data-hover>
-                        <div class="stat-value">12+</div>
-                        <div class="stat-label">Years Experience</div>
+                        <div class="stat-value">24hr</div>
+                        <div class="stat-label">Response Time</div>
                     </div>
                 </div>
             </div>
@@ -692,23 +843,23 @@
         <div class="marquee-track">
             <div class="marquee-group">
                 <span class="marquee-item">Google Ads<span class="marquee-dot"></span></span>
-                <span class="marquee-item">Meta Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Facebook Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Instagram Ads<span class="marquee-dot"></span></span>
                 <span class="marquee-item">TikTok Ads<span class="marquee-dot"></span></span>
-                <span class="marquee-item">LinkedIn Ads<span class="marquee-dot"></span></span>
-                <span class="marquee-item">Programmatic<span class="marquee-dot"></span></span>
                 <span class="marquee-item">YouTube Ads<span class="marquee-dot"></span></span>
-                <span class="marquee-item">Display Network<span class="marquee-dot"></span></span>
-                <span class="marquee-item">Performance Max<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Local Search<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Retargeting<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Shopping Ads<span class="marquee-dot"></span></span>
             </div>
             <div class="marquee-group">
                 <span class="marquee-item">Google Ads<span class="marquee-dot"></span></span>
-                <span class="marquee-item">Meta Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Facebook Ads<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Instagram Ads<span class="marquee-dot"></span></span>
                 <span class="marquee-item">TikTok Ads<span class="marquee-dot"></span></span>
-                <span class="marquee-item">LinkedIn Ads<span class="marquee-dot"></span></span>
-                <span class="marquee-item">Programmatic<span class="marquee-dot"></span></span>
                 <span class="marquee-item">YouTube Ads<span class="marquee-dot"></span></span>
-                <span class="marquee-item">Display Network<span class="marquee-dot"></span></span>
-                <span class="marquee-item">Performance Max<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Local Search<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Retargeting<span class="marquee-dot"></span></span>
+                <span class="marquee-item">Shopping Ads<span class="marquee-dot"></span></span>
             </div>
         </div>
     </div>
@@ -717,8 +868,8 @@
     <section class="services-section" id="services">
         <div class="section-header reveal">
             <div class="section-number">01 — Services</div>
-            <h2 class="section-title">What We <span class="highlight">Do</span></h2>
-            <p class="section-desc">End-to-end advertising solutions built for performance.</p>
+            <h2 class="section-title">What We <span class="highlight">Handle</span></h2>
+            <p class="section-desc">Everything you need to run profitable ads — we take care of it all.</p>
         </div>
         
         <div class="services-grid">
@@ -729,8 +880,8 @@
                         <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
                     </svg>
                 </div>
-                <h3 class="service-title">Paid Media Strategy</h3>
-                <p class="service-desc">Full-funnel architecture across Google, Meta, TikTok, and programmatic networks.</p>
+                <h3 class="service-title">Strategy & Setup</h3>
+                <p class="service-desc">We craft and launch your ad campaigns from scratch on Google, Meta, and TikTok using shared tools for seamless, async input—no meetings required.</p>
             </div>
             
             <div class="service-item" data-hover>
@@ -743,11 +894,48 @@
                     </svg>
                 </div>
                 <h3 class="service-title">Precision Targeting</h3>
-                <p class="service-desc">Advanced audience segmentation using first-party data and behavioral signals.</p>
+                <p class="service-desc">We identify and refine the ideal audience segments to maximize ROI, with async reviews via dashboards so you approve without delays.</p>
             </div>
             
             <div class="service-item" data-hover>
                 <span class="service-num">03</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <path d="M9 18h6"/>
+                        <path d="M10 22h4"/>
+                        <path d="M12 2a7 7 0 0 0-7 7c0 2.38 1.19 4.47 3 5.74V17a1 1 0 0 0 1 1h6a1 1 0 0 0 1-1v-2.26c1.81-1.27 3-3.36 3-5.74a7 7 0 0 0-7-7z"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Creative Development</h3>
+                <p class="service-desc">We design eye-catching ad copy, images, and videos that drive clicks, collaborating through online approval platforms for quick, written feedback.</p>
+            </div>
+            
+            <div class="service-item" data-hover>
+                <span class="service-num">04</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
+                        <polyline points="17 6 23 6 23 12"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Real-Time Optimization</h3>
+                <p class="service-desc">We monitor and tweak campaigns daily via automated tools to boost performance, sharing updates and changes through email and shared docs.</p>
+            </div>
+            
+            <div class="service-item" data-hover>
+                <span class="service-num">05</span>
+                <div class="service-icon">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                        <line x1="12" y1="1" x2="12" y2="23"/>
+                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                    </svg>
+                </div>
+                <h3 class="service-title">Budget Scaling</h3>
+                <p class="service-desc">We manage and stretch your ad spend for optimal results, with async adjustments and alerts to ensure efficiency without overspending.</p>
+            </div>
+            
+            <div class="service-item" data-hover>
+                <span class="service-num">06</span>
                 <div class="service-icon">
                     <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
                         <path d="M18 20V10"/>
@@ -755,45 +943,8 @@
                         <path d="M6 20v-6"/>
                     </svg>
                 </div>
-                <h3 class="service-title">Analytics & Attribution</h3>
-                <p class="service-desc">Custom dashboards and multi-touch attribution for total clarity.</p>
-            </div>
-            
-            <div class="service-item" data-hover>
-                <span class="service-num">04</span>
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M12 19l7-7 3 3-7 7-3-3z"/>
-                        <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
-                        <path d="M2 2l7.586 7.586"/>
-                        <circle cx="11" cy="11" r="2"/>
-                    </svg>
-                </div>
-                <h3 class="service-title">Creative Strategy</h3>
-                <p class="service-desc">Performance creative frameworks that balance brand with direct response.</p>
-            </div>
-            
-            <div class="service-item" data-hover>
-                <span class="service-num">05</span>
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <polyline points="23 6 13.5 15.5 8.5 10.5 1 18"/>
-                        <polyline points="17 6 23 6 23 12"/>
-                    </svg>
-                </div>
-                <h3 class="service-title">Conversion Optimization</h3>
-                <p class="service-desc">Landing page optimization and funnel analysis for maximum value.</p>
-            </div>
-            
-            <div class="service-item" data-hover>
-                <span class="service-num">06</span>
-                <div class="service-icon">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
-                        <path d="M22 12h-4l-3 9L9 3l-3 9H2"/>
-                    </svg>
-                </div>
-                <h3 class="service-title">Scale & Automation</h3>
-                <p class="service-desc">Systematic scaling and automated bidding for maximum efficiency.</p>
+                <h3 class="service-title">Insightful Reporting</h3>
+                <p class="service-desc">We deliver clear, automated weekly reports on key metrics via email, highlighting wins and next steps so you stay informed at your pace.</p>
             </div>
         </div>
     </section>
@@ -802,48 +953,48 @@
     <section class="results-section" id="results">
         <div class="section-header reveal">
             <div class="section-number">02 — Results</div>
-            <h2 class="section-title">Proven <span class="highlight">Performance</span></h2>
-            <p class="section-desc">Real campaigns. Real numbers. Real growth.</p>
+            <h2 class="section-title">Small Business <span class="highlight">Wins</span></h2>
+            <p class="section-desc">Real stories from businesses just like yours.</p>
         </div>
         
         <div class="results-grid">
             <div class="result-item" data-hover>
-                <span class="result-tag">E-Commerce / DTC</span>
-                <h3 class="result-title">Premium Fashion Brand</h3>
-                <p class="result-desc">Scaled from $80K to $400K monthly revenue while maintaining profitability.</p>
+                <span class="result-tag">Local Service</span>
+                <h3 class="result-title">Home Cleaning Company</h3>
+                <p class="result-desc">Went from random leads to a fully booked calendar within 60 days of working together.</p>
                 <div class="result-stat">
-                    <span class="stat-big">5.8x</span>
-                    <span class="stat-suffix">ROAS achieved</span>
+                    <span class="stat-big">4.2x</span>
+                    <span class="stat-suffix">Return on ad spend</span>
                 </div>
             </div>
             
             <div class="result-item" data-hover>
-                <span class="result-tag">SaaS / B2B</span>
-                <h3 class="result-title">Enterprise Lead Generation</h3>
-                <p class="result-desc">Restructured campaigns to deliver qualified leads at fraction of previous cost.</p>
+                <span class="result-tag">Online Store</span>
+                <h3 class="result-title">Handmade Jewelry Shop</h3>
+                <p class="result-desc">Stopped wasting $800/month on bad ads and started getting consistent online sales.</p>
                 <div class="result-stat">
-                    <span class="stat-big">-67%</span>
-                    <span class="stat-suffix">Cost per lead</span>
+                    <span class="stat-big">-58%</span>
+                    <span class="stat-suffix">Cost per sale</span>
                 </div>
             </div>
             
             <div class="result-item" data-hover>
-                <span class="result-tag">Health & Wellness</span>
-                <h3 class="result-title">Supplement Brand Growth</h3>
-                <p class="result-desc">Took brand from startup to market leader with systematic expansion.</p>
+                <span class="result-tag">Fitness</span>
+                <h3 class="result-title">Personal Training Studio</h3>
+                <p class="result-desc">Filled all membership slots with a modest $500/month ad budget.</p>
                 <div class="result-stat">
-                    <span class="stat-big">10x</span>
-                    <span class="stat-suffix">Revenue growth</span>
+                    <span class="stat-big">23</span>
+                    <span class="stat-suffix">New members/month</span>
                 </div>
             </div>
             
             <div class="result-item" data-hover>
-                <span class="result-tag">Fintech / Apps</span>
-                <h3 class="result-title">Mobile App Acquisition</h3>
-                <p class="result-desc">Drove millions of qualified installs while maintaining strict CPI targets.</p>
+                <span class="result-tag">Food & Beverage</span>
+                <h3 class="result-title">Local Coffee Roaster</h3>
+                <p class="result-desc">Launched their online store and hit profitability in the first month of ads.</p>
                 <div class="result-stat">
-                    <span class="stat-big">2.4M</span>
-                    <span class="stat-suffix">Installs @ $0.87</span>
+                    <span class="stat-big">$12K</span>
+                    <span class="stat-suffix">First month revenue</span>
                 </div>
             </div>
         </div>
@@ -853,34 +1004,34 @@
     <section class="process-section" id="process">
         <div class="section-header reveal">
             <div class="section-number">03 — Process</div>
-            <h2 class="section-title">How We <span class="highlight">Work</span></h2>
-            <p class="section-desc">A proven framework refined over 200+ campaigns.</p>
+            <h2 class="section-title">How It <span class="highlight">Works</span></h2>
+            <p class="section-desc">Simple, straightforward — just the way it should be.</p>
         </div>
         
         <div class="process-wrapper">
             <div class="process-track">
                 <div class="process-step" data-hover>
                     <div class="step-num">01</div>
-                    <h3 class="step-title">Discovery</h3>
-                    <p class="step-desc">Deep dive into your business, goals, and current performance.</p>
+                    <h3 class="step-title">Quick Chat</h3>
+                    <p class="step-desc">Tell us about your business, budget, and goals — takes 15 minutes.</p>
                 </div>
                 
                 <div class="process-step" data-hover>
                     <div class="step-num">02</div>
-                    <h3 class="step-title">Strategy</h3>
-                    <p class="step-desc">Custom campaign architecture designed for your specific objectives.</p>
+                    <h3 class="step-title">We Build</h3>
+                    <p class="step-desc">We set up everything — campaigns, targeting, creative — you just approve.</p>
                 </div>
                 
                 <div class="process-step" data-hover>
                     <div class="step-num">03</div>
-                    <h3 class="step-title">Execute</h3>
-                    <p class="step-desc">Launch with meticulous attention to every detail.</p>
+                    <h3 class="step-title">Go Live</h3>
+                    <p class="step-desc">Your ads start running and we monitor everything daily.</p>
                 </div>
                 
                 <div class="process-step" data-hover>
                     <div class="step-num">04</div>
-                    <h3 class="step-title">Optimize</h3>
-                    <p class="step-desc">Continuous testing and refinement for peak performance.</p>
+                    <h3 class="step-title">Grow</h3>
+                    <p class="step-desc">Watch the leads and sales roll in while we keep improving results.</p>
                 </div>
             </div>
         </div>
@@ -893,19 +1044,138 @@
             <h2 class="section-title">Client <span class="highlight">Feedback</span></h2>
         </div>
         
-        <div class="testimonial-wrapper reveal">
-            <div class="testimonial-block">
-                <div class="quote-mark">
-                    <svg viewBox="0 0 24 24" fill="currentColor">
-                        <path d="M11.192 15.757c0-.88-.23-1.618-.69-2.217-.326-.412-.768-.683-1.327-.812-.55-.128-1.07-.137-1.54-.028-.16-.95.1-1.956.76-3.022.66-1.065 1.515-1.867 2.558-2.403L9.373 5c-.8.396-1.56.898-2.26 1.505-.71.607-1.34 1.305-1.9 2.094s-.98 1.68-1.25 2.69-.346 2.04-.217 3.1c.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l.002.003zm9.124 0c0-.88-.23-1.618-.69-2.217-.326-.42-.77-.692-1.327-.817-.56-.124-1.074-.13-1.54-.022-.16-.94.09-1.95.75-3.02.66-1.06 1.514-1.86 2.557-2.4L18.49 5c-.8.396-1.555.898-2.26 1.505-.708.607-1.34 1.305-1.894 2.094-.556.79-.97 1.68-1.24 2.69-.273 1-.345 2.04-.217 3.1.168 1.4.62 2.52 1.356 3.35.735.84 1.652 1.26 2.748 1.26.965 0 1.766-.29 2.4-.878.628-.576.94-1.365.94-2.368l-.007.003z"/>
-                    </svg>
+        <div class="testimonial-marquee">
+            <div class="testimonial-track">
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"I was spending $1,500/month on ads and getting nothing. Illium took over and within a month I was getting 3-4 new clients every week."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Marcus Rodriguez" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Marcus Rodriguez</div>
+                            <div class="author-role">Fresh Start Landscaping</div>
+                        </div>
+                    </div>
                 </div>
-                <p class="testimonial-text">Illium Ads completely transformed our advertising approach. Our customer acquisition cost dropped 52% while we quadrupled our ad spend. The ROI speaks for itself.</p>
-                <div class="testimonial-author">
-                    <div class="author-avatar">SM</div>
-                    <div class="author-info">
-                        <div class="author-name">Sarah Mitchell</div>
-                        <div class="author-role">CMO, TechStart Inc.</div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Finally, ads that actually work! Our cost per lead dropped by 60% and we're now fully booked 3 months out."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Kim" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Sarah Kim</div>
+                            <div class="author-role">Bright Smile Dental</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"No meetings, no calls, just results delivered to my inbox. Exactly what a busy business owner needs."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="James Thompson" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">James Thompson</div>
+                            <div class="author-role">Thompson Plumbing Co.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Went from struggling to get 5 leads a month to consistently getting 30+. The ROI speaks for itself."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Lisa Patel" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Lisa Patel</div>
+                            <div class="author-role">Patel Insurance Agency</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Best marketing investment we've made. They actually understand small business budgets and make every dollar count."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="David Martinez" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">David Martinez</div>
+                            <div class="author-role">Martinez Auto Repair</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Our online bookings tripled in the first 2 months. I wish I found them sooner!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Amy Wilson" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Amy Wilson</div>
+                            <div class="author-role">Serenity Spa & Wellness</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Duplicate for seamless loop -->
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"I was spending $1,500/month on ads and getting nothing. Illium took over and within a month I was getting 3-4 new clients every week."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/32.jpg" alt="Marcus Rodriguez" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Marcus Rodriguez</div>
+                            <div class="author-role">Fresh Start Landscaping</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Finally, ads that actually work! Our cost per lead dropped by 60% and we're now fully booked 3 months out."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/44.jpg" alt="Sarah Kim" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Sarah Kim</div>
+                            <div class="author-role">Bright Smile Dental</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"No meetings, no calls, just results delivered to my inbox. Exactly what a busy business owner needs."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/67.jpg" alt="James Thompson" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">James Thompson</div>
+                            <div class="author-role">Thompson Plumbing Co.</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Went from struggling to get 5 leads a month to consistently getting 30+. The ROI speaks for itself."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/28.jpg" alt="Lisa Patel" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Lisa Patel</div>
+                            <div class="author-role">Patel Insurance Agency</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Best marketing investment we've made. They actually understand small business budgets and make every dollar count."</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/men/52.jpg" alt="David Martinez" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">David Martinez</div>
+                            <div class="author-role">Martinez Auto Repair</div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="testimonial-card">
+                    <p class="testimonial-quote">"Our online bookings tripled in the first 2 months. I wish I found them sooner!"</p>
+                    <div class="testimonial-author">
+                        <img src="https://randomuser.me/api/portraits/women/65.jpg" alt="Amy Wilson" class="author-avatar">
+                        <div class="author-info">
+                            <div class="author-name">Amy Wilson</div>
+                            <div class="author-role">Serenity Spa & Wellness</div>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -915,9 +1185,9 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-inner reveal">
-            <h2 class="cta-title">Ready to <span class="gradient">Grow</span>?</h2>
-            <p class="cta-desc">Get in touch and let's discuss how we can help scale your business.</p>
-            <button class="btn-hero" onclick="document.getElementById('contact').scrollIntoView({behavior: 'smooth'})" data-hover>
+            <h2 class="cta-title">Ready to <span class="gradient">Stop Wasting Money</span>?</h2>
+            <p class="cta-desc">Let's chat about how we can get your ads actually working for you.</p>
+            <button class="btn-hero" onclick="scrollToSection('contact')" data-hover>
                 <span>Contact Us</span>
                 <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
                     <path d="M5 12h14M12 5l7 7-7 7"/>
@@ -928,60 +1198,29 @@
 
     <!-- Contact Section -->
     <section class="contact-section" id="contact">
-        <div class="contact-grid">
-            <div class="contact-info reveal-left">
-                <h3>Let's <span class="gradient">Connect</span></h3>
-                <p>Have a project in mind? We'd love to hear about it. Drop us a message and we'll get back to you within 24 hours.</p>
-                <div class="contact-list">
-                    <div class="contact-item" data-hover>
-                        <div class="contact-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <polyline points="12 6 12 12 16 14"/>
-                            </svg>
-                        </div>
-                        <span class="contact-text">Response within 24 hours</span>
-                    </div>
-                    <div class="contact-item" data-hover>
-                        <div class="contact-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/>
-                                <polyline points="22,6 12,13 2,6"/>
-                            </svg>
-                        </div>
-                        <span class="contact-text">hello@illiumads.com</span>
-                    </div>
-                    <div class="contact-item" data-hover>
-                        <div class="contact-icon">
-                            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="12" cy="12" r="10"/>
-                                <line x1="2" y1="12" x2="22" y2="12"/>
-                                <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/>
-                            </svg>
-                        </div>
-                        <span class="contact-text">Working Globally (Remote)</span>
-                    </div>
-                </div>
+        <div class="contact-centered">
+            <div class="contact-header reveal">
+                <h3>Let's <span class="gradient">Talk</span></h3>
+                <p>Ready to stop wasting money on ads? Tell us about your business.</p>
             </div>
             
-            <form class="contact-form reveal-right" id="contactForm">
+            <form class="contact-form-centered reveal" id="contactForm" novalidate>
                 <div class="form-row">
                     <div class="form-group">
                         <label for="name">Name</label>
                         <input type="text" id="name" name="name" required placeholder="Your name">
+                        <span class="field-error" id="name-error"></span>
                     </div>
                     <div class="form-group">
                         <label for="email">Email</label>
-                        <input type="email" id="email" name="email" required placeholder="you@company.com">
+                        <input type="email" id="email" name="email" required placeholder="your@email.com">
+                        <span class="field-error" id="email-error"></span>
                     </div>
                 </div>
                 <div class="form-group full">
-                    <label for="company">Company</label>
-                    <input type="text" id="company" name="company" placeholder="Your company">
-                </div>
-                <div class="form-group full">
                     <label for="message">Message</label>
-                    <textarea id="message" name="message" required placeholder="Tell us about your project..."></textarea>
+                    <textarea id="message" name="message" required placeholder="Tell us about your business..."></textarea>
+                    <span class="field-error" id="message-error"></span>
                 </div>
                 <button type="submit" class="form-submit" data-hover>
                     <span>Send Message</span>
@@ -994,7 +1233,39 @@
     <!-- Footer -->
     <footer class="footer">
         <div class="footer-inner">
-            <div class="footer-logo">ILLIUM ADS</div>
+            <div class="footer-logo">ILLIUM ADS <img src="{{ url_for('static', filename='images/logowhite.png') }}" alt="Illium Logo" class="footer-logo-icon"></div>
+            <div class="footer-social">
+                <a href="#" class="social-link" aria-label="Instagram" data-hover>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <rect x="2" y="2" width="20" height="20" rx="5" ry="5"/>
+                        <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/>
+                        <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" aria-label="Facebook" data-hover>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" aria-label="TikTok" data-hover>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 12a4 4 0 1 0 4 4V4a5 5 0 0 0 5 5"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" aria-label="X" data-hover>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M4 4l11.733 16h4.267l-11.733 -16z"/>
+                        <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772"/>
+                    </svg>
+                </a>
+                <a href="#" class="social-link" aria-label="LinkedIn" data-hover>
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/>
+                        <rect x="2" y="9" width="4" height="12"/>
+                        <circle cx="4" cy="4" r="2"/>
+                    </svg>
+                </a>
+            </div>
             <div class="footer-links">
                 <a href="#about">About</a>
                 <a href="#services">Services</a>

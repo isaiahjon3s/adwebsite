@@ -2,6 +2,34 @@
 // ILLIUM ADS - ELITE INTERACTIONS
 // ============================================
 
+// Global scroll helper function
+function scrollToSection(sectionId) {
+    const target = document.getElementById(sectionId);
+    if (target) {
+        // For 'about' section, scroll so hero is completely out of view
+        if (sectionId === 'about') {
+            const hero = document.querySelector('.hero');
+            if (hero) {
+                const heroBottom = hero.offsetTop + hero.offsetHeight;
+                window.scrollTo({
+                    top: heroBottom,
+                    behavior: 'smooth'
+                });
+                return;
+            }
+        }
+        
+        const nav = document.querySelector('.nav');
+        const navHeight = nav ? nav.offsetHeight : 80;
+        const targetPosition = target.getBoundingClientRect().top + window.pageYOffset - navHeight;
+        
+        window.scrollTo({
+            top: targetPosition,
+            behavior: 'smooth'
+        });
+    }
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // ============================================
@@ -10,117 +38,60 @@ document.addEventListener('DOMContentLoaded', () => {
     const preloader = document.getElementById('preloader');
     const percentEl = document.querySelector('.preloader-percent');
     let progress = 0;
+    let isLoaded = false;
+    let animationComplete = false;
+    const MIN_DISPLAY_TIME = 2500; // Minimum time to show preloader (for ILLIUM animation)
+    const startTime = Date.now();
     
-    const counterInterval = setInterval(() => {
-        progress += Math.random() * 15;
-        if (progress >= 100) {
-            progress = 100;
-            clearInterval(counterInterval);
-        }
-        if (percentEl) {
-            percentEl.textContent = Math.floor(progress) + '%';
-        }
-    }, 100);
+    const updateDisplay = () => {
+        if (percentEl) percentEl.textContent = Math.floor(progress) + '%';
+        document.documentElement.style.setProperty('--load-progress', progress + '%');
+    };
     
+    const animateToTarget = (target, speed, callback) => {
+        const animate = () => {
+            if (progress < target) {
+                progress += speed;
+                if (progress > target) progress = target;
+                updateDisplay();
+                requestAnimationFrame(animate);
+            } else if (callback) {
+                callback();
+            }
+        };
+        requestAnimationFrame(animate);
+    };
+    
+    const hidePreloader = () => {
+        if (preloader) preloader.classList.add('complete');
+        document.body.style.overflow = 'visible';
+    };
+    
+    const checkAndHide = () => {
+        const elapsed = Date.now() - startTime;
+        const remainingTime = Math.max(0, MIN_DISPLAY_TIME - elapsed);
+        
+        // Wait for minimum display time to let ILLIUM animation complete
+        setTimeout(hidePreloader, remainingTime + 300);
+    };
+    
+    // Start loading - slower initial progress
+    animateToTarget(40, 0.8);
+    
+    // Gradually increase to 70% while waiting
+    setTimeout(() => {
+        if (!isLoaded) animateToTarget(70, 0.5);
+    }, 800);
+    
+    // When page is fully loaded
     window.addEventListener('load', () => {
-        setTimeout(() => {
-            progress = 100;
-            if (percentEl) percentEl.textContent = '100%';
-            clearInterval(counterInterval);
-            
-            setTimeout(() => {
-                if (preloader) preloader.classList.add('complete');
-                document.body.style.overflow = 'visible';
-            }, 300);
-        }, 2500);
-    });
-
-    // ============================================
-    // ADVANCED CURSOR SYSTEM
-    // ============================================
-    const cursorDot = document.querySelector('.cursor-dot');
-    const cursorRing = document.querySelector('.cursor-ring');
-    
-    let mouseX = 0, mouseY = 0;
-    let dotX = 0, dotY = 0;
-    let ringX = 0, ringY = 0;
-    
-    // Cursor trail particles
-    const trailCount = 8;
-    const trails = [];
-    
-    for (let i = 0; i < trailCount; i++) {
-        const trail = document.createElement('div');
-        trail.className = 'cursor-trail';
-        trail.style.opacity = 1 - (i / trailCount);
-        trail.style.width = (8 - i) + 'px';
-        trail.style.height = (8 - i) + 'px';
-        document.body.appendChild(trail);
-        trails.push({
-            el: trail,
-            x: 0,
-            y: 0
+        isLoaded = true;
+        
+        // Smoothly finish to 100%
+        animateToTarget(100, 1.5, () => {
+            updateDisplay();
+            checkAndHide();
         });
-    }
-    
-    document.addEventListener('mousemove', (e) => {
-        mouseX = e.clientX;
-        mouseY = e.clientY;
-    });
-    
-    function animateCursor() {
-        // Smooth follow
-        dotX += (mouseX - dotX) * 0.35;
-        dotY += (mouseY - dotY) * 0.35;
-        ringX += (mouseX - ringX) * 0.15;
-        ringY += (mouseY - ringY) * 0.15;
-        
-        if (cursorDot) {
-            cursorDot.style.left = dotX + 'px';
-            cursorDot.style.top = dotY + 'px';
-        }
-        
-        if (cursorRing) {
-            cursorRing.style.left = ringX + 'px';
-            cursorRing.style.top = ringY + 'px';
-        }
-        
-        // Trail animation
-        let prevX = dotX;
-        let prevY = dotY;
-        
-        trails.forEach((trail, i) => {
-            const speed = 0.35 - (i * 0.03);
-            trail.x += (prevX - trail.x) * speed;
-            trail.y += (prevY - trail.y) * speed;
-            trail.el.style.left = trail.x + 'px';
-            trail.el.style.top = trail.y + 'px';
-            prevX = trail.x;
-            prevY = trail.y;
-        });
-        
-        requestAnimationFrame(animateCursor);
-    }
-    animateCursor();
-    
-    // Cursor states
-    const hoverTargets = document.querySelectorAll('a, button, [data-hover], .service-item, .result-item, .stat-card, .process-step, .contact-item');
-    
-    hoverTargets.forEach(el => {
-        el.addEventListener('mouseenter', () => {
-            if (cursorRing) cursorRing.classList.add('expanded');
-        });
-        el.addEventListener('mouseleave', () => {
-            if (cursorRing) cursorRing.classList.remove('expanded');
-        });
-    });
-    
-    document.addEventListener('mousedown', () => {
-        if (cursorRing) cursorRing.style.transform = 'translate(-50%, -50%) scale(0.85)';
-    });
-    
-    document.addEventListener('mouseup', () => {
-        if (cursorRing) cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
     });
 
     // ============================================
@@ -314,11 +285,22 @@ document.addEventListener('DOMContentLoaded', () => {
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function(e) {
             e.preventDefault();
-            const target = document.querySelector(this.getAttribute('href'));
+            const href = this.getAttribute('href');
+            
+            if (href === '#' || href === '#home') {
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+                return;
+            }
+            
+            const target = document.querySelector(href);
             if (target) {
-                const offsetTop = target.offsetTop - 100;
+                const nav = document.querySelector('.nav');
+                const navHeight = nav ? nav.offsetHeight : 80;
+                // Scroll further down so section fills the screen
+                const targetPosition = target.offsetTop - navHeight + 40;
+                
                 window.scrollTo({
-                    top: offsetTop,
+                    top: targetPosition,
                     behavior: 'smooth'
                 });
             }
@@ -331,15 +313,23 @@ document.addEventListener('DOMContentLoaded', () => {
     const glitchElements = document.querySelectorAll('.nav-logo');
     
     glitchElements.forEach(el => {
-        const originalText = el.textContent;
-        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!@#$%';
+        const textSpan = el.querySelector('span');
+        if (!textSpan) return;
+        
+        const originalText = textSpan.textContent;
+        const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+        let isAnimating = false;
         
         el.addEventListener('mouseenter', () => {
+            if (isAnimating) return;
+            isAnimating = true;
+            
             let iterations = 0;
             const interval = setInterval(() => {
-                el.textContent = originalText
+                textSpan.textContent = originalText
                     .split('')
                     .map((char, index) => {
+                        if (char === ' ') return ' ';
                         if (index < iterations) {
                             return originalText[index];
                         }
@@ -349,21 +339,93 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (iterations >= originalText.length) {
                     clearInterval(interval);
+                    textSpan.textContent = originalText;
+                    isAnimating = false;
                 }
                 
-                iterations += 1 / 3;
-            }, 30);
+                iterations += 1 / 2;
+            }, 40);
         });
     });
 
     // ============================================
-    // FORM HANDLING
+    // FORM HANDLING WITH CUSTOM VALIDATION
     // ============================================
     const form = document.getElementById('contactForm');
     
     if (form) {
+        // Custom validation messages
+        const validationMessages = {
+            name: 'Please enter your name',
+            email: 'Please enter a valid email address',
+            message: 'Please tell us about your business'
+        };
+        
+        // Validate a single field
+        function validateField(field) {
+            const errorEl = document.getElementById(`${field.id}-error`);
+            let isValid = true;
+            let message = '';
+            
+            // Remove previous states
+            field.classList.remove('error', 'valid');
+            if (errorEl) errorEl.classList.remove('show');
+            
+            // Check if empty (for required fields)
+            if (field.hasAttribute('required') && !field.value.trim()) {
+                isValid = false;
+                message = validationMessages[field.id] || 'This field is required';
+            }
+            // Check email format
+            else if (field.type === 'email' && field.value.trim()) {
+                const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(field.value)) {
+                    isValid = false;
+                    message = 'Please enter a valid email address';
+                }
+            }
+            
+            // Apply states
+            if (!isValid) {
+                field.classList.add('error');
+                if (errorEl) {
+                    errorEl.textContent = message;
+                    errorEl.classList.add('show');
+                }
+            } else if (field.value.trim()) {
+                field.classList.add('valid');
+            }
+            
+            return isValid;
+        }
+        
+        // Clear error when user starts typing
+        const formFields = form.querySelectorAll('input[required], textarea[required]');
+        formFields.forEach(field => {
+            field.addEventListener('input', () => {
+                const errorEl = document.getElementById(`${field.id}-error`);
+                field.classList.remove('error');
+                if (errorEl) errorEl.classList.remove('show');
+            });
+        });
+        
         form.addEventListener('submit', async (e) => {
             e.preventDefault();
+            
+            // Validate all fields only on submit
+            let isFormValid = true;
+            formFields.forEach(field => {
+                if (!validateField(field)) {
+                    isFormValid = false;
+                }
+            });
+            
+            if (!isFormValid) {
+                // Focus first invalid field
+                const firstError = form.querySelector('.error');
+                if (firstError) firstError.focus();
+                return;
+            }
             
             const formMessage = document.getElementById('formMessage');
             const submitBtn = form.querySelector('.form-submit');
@@ -394,6 +456,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 
                 if (result.success) {
                     form.reset();
+                    // Clear valid states
+                    formFields.forEach(field => field.classList.remove('valid'));
                 }
             } catch (error) {
                 if (formMessage) {
@@ -509,7 +573,7 @@ document.addEventListener('DOMContentLoaded', () => {
         top: 0;
         left: 0;
         height: 2px;
-        background: linear-gradient(90deg, #00F0FF, #8B5CF6, #FF006E);
+        background: linear-gradient(90deg, #BFFF00, #3B82F6);
         z-index: 10000;
         transform-origin: left;
         transform: scaleX(0);
