@@ -11,12 +11,14 @@ def home():
 def contact():
     """Handle contact form submissions."""
     data = request.get_json()
-    name = data.get('name')
+    first_name = data.get('first_name')
+    last_name = data.get('last_name')
     email = data.get('email')
+    business_type = data.get('business_type')
     message = data.get('message')
     
     # In production, you would send an email or save to database
-    print(f"New contact: {name} ({email}): {message}")
+    print(f"New contact: {first_name} {last_name} ({email}) - {business_type}: {message}")
     
     return jsonify({'success': True, 'message': 'Thank you! I\'ll be in touch soon.'})
 

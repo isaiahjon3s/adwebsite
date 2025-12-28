@@ -356,8 +356,10 @@ document.addEventListener('DOMContentLoaded', () => {
     if (form) {
         // Custom validation messages
         const validationMessages = {
-            name: 'Please enter your name',
+            firstName: 'Please enter your first name',
+            lastName: 'Please enter your last name',
             email: 'Please enter a valid email address',
+            businessType: 'Please select your business type',
             message: 'Please tell us about your business'
         };
         
@@ -400,7 +402,7 @@ document.addEventListener('DOMContentLoaded', () => {
         }
         
         // Clear error when user starts typing
-        const formFields = form.querySelectorAll('input[required], textarea[required]');
+        const formFields = form.querySelectorAll('input[required], select[required], textarea[required]');
         formFields.forEach(field => {
             field.addEventListener('input', () => {
                 const errorEl = document.getElementById(`${field.id}-error`);
@@ -435,8 +437,10 @@ document.addEventListener('DOMContentLoaded', () => {
             submitBtn.disabled = true;
             
             const formData = {
-                name: form.querySelector('#name').value,
+                first_name: form.querySelector('#firstName').value,
+                last_name: form.querySelector('#lastName').value,
                 email: form.querySelector('#email').value,
+                business_type: form.querySelector('#businessType').value,
                 message: form.querySelector('#message').value
             };
             
