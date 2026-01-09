@@ -20,7 +20,7 @@ def contact():
     # In production, you would send an email or save to database
     print(f"New contact: {first_name} {last_name} ({email}) - {business_type}: {message}")
     
-    return jsonify({'success': True, 'message': 'Thank you! I\'ll be in touch soon.'})
+    return jsonify({'success': True, 'message': 'Thank you! We will be in touch soon.'})
 
 if __name__ == '__main__':
     app.run(debug=True, port=5000)
