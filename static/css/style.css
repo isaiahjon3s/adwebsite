@@ -708,7 +708,7 @@ body {
 .status-dot {
     width: 6px;
     height: 6px;
-    background: #00f064;
+    background: #02dc5d;
     animation: pulse 1.5s ease-in-out infinite;
 }
 
