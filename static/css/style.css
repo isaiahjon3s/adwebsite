@@ -1230,7 +1230,7 @@ section {
     transition: all 0.5s var(--ease-expo);
 }
 
-.process-step:nth-child(2) .step-num { color: #D4FF00; border-color: rgba(212, 255, 0, 0.3); }
+.process-step:nth-child(2) .step-num { color: #d0f903; border-color: rgba(212, 255, 0, 0.3); }
 .process-step:nth-child(3) .step-num { color: #F5FF33; border-color: rgba(245, 255, 51, 0.3); }
 .process-step:nth-child(4) .step-num { color: #ECFF6B; border-color: rgba(236, 255, 107, 0.3); }
 
