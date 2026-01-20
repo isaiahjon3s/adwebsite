@@ -266,17 +266,24 @@ body {
     position: relative;
     display: flex;
     align-items: center;
-    gap: 0.5rem;
+    gap: 1.25rem;
 }
 
 .nav-logo-icon {
-    width: 90px;
-    height: 90px;
-    transition: transform 0.3s var(--ease-expo);
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }
 
-.nav-logo:hover .nav-logo-icon {
-    transform: scale(1.1);
+.nav-logo:hover span {
+    display: inline-block;
+    animation: textShake 0.3s ease;
+}
+
+@keyframes textShake {
+    0%, 100% { transform: translateX(0); }
+    25% { transform: translateX(-2px); }
+    75% { transform: translateX(2px); }
 }
 
 @keyframes pulse {
@@ -1763,8 +1770,9 @@ section {
 }
 
 .footer-logo-icon {
-    width: 50px;
-    height: auto;
+    width: 28px;
+    height: 28px;
+    object-fit: contain;
 }
 
 .footer-links {
